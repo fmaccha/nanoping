@@ -25,7 +25,8 @@ struct nanoping_timeval {
 
 #define timevalsub(tvp, uvp, vvp) \
     do { \
-        assert(!timevalcmp(tvp, uvp, <)); \
+        if (timevalcmp(tvp, uvp, <))  \
+            break;         \
         (vvp)->tv_sec = (tvp)->tv_sec - (uvp)->tv_sec; \
         (vvp)->tv_nsec = (tvp)->tv_nsec - (uvp)->tv_nsec; \
         if ((vvp)->tv_nsec < 0) { \
